@@ -1,0 +1,46 @@
+#!/bin/bash
+
+
+# You may want to edit the following lines: use "qos=standard" for
+
+# more than 2 nodes. Replace "account=dc116" below with your own
+
+# budget code (e.g. dc116-s1234567)
+
+
+#SBATCH --account=dc116-s2043919
+
+#SBATCH --job-name=percolate
+
+#SBATCH --time=00:01:00
+
+#SBATCH --qos=standard
+
+#SBATCH --nodes=28
+
+#SBATCH --ntasks=200
+
+
+# You can probably leave these options mostly as they are
+
+
+#SBATCH --output=%x-%j.out
+
+#SBATCH --error=%x-%j.err
+
+#SBATCH --exclusive
+
+#SBATCH --tasks-per-node=36
+
+#SBATCH --cpus-per-task=1
+
+#SBATCH --partition=standard
+
+
+module load intel-compilers-19
+module load mpt
+
+# Launch the parallel job
+
+
+srun --cpu-bind=core ./percolate -l 5000
